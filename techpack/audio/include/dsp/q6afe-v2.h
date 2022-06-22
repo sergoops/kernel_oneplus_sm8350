@@ -697,4 +697,6 @@ void afe_tdm_paired_rx_cfg_val(int intf_idx, int afe_port_id,
 	struct afe_param_id_tdm_lane_cfg tdm_lane);
 int afe_paired_rx_tdm_port_ops(int intf_idx, bool enable, atomic_t *dai_group_ref);
 
+int set_smartpa_pm_status_apr(void *buf, int cmd_size);
+int get_smartpa_pm_result_apr(void *buf, int cmd_size);
 #endif /* __Q6AFE_V2_H__ */
