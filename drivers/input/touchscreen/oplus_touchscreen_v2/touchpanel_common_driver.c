@@ -3059,7 +3059,7 @@ int register_common_touch_device(struct touchpanel_data *pdata)
 	ts->loading_fw = false;
 	ts->is_suspended = 0;
 	ts->suspend_state = TP_SPEEDUP_RESUME_COMPLETE;
-	ts->gesture_enable = 0;
+	ts->gesture_enable = 1;
 	ts->fd_enable = 0;
 	ts->fp_enable = 0;
 	ts->fp_info.touch_state = 0;
