@@ -536,6 +536,10 @@ static void tp_gesture_handle(struct touchpanel_data *ts)
 		gesture_info_temp.gesture_type == HEART ? "heart" :
 		gesture_info_temp.gesture_type == S_GESTURE ? "(S)" : "unknown");
 
+	ts->double_tap_pressed = (gesture_info_temp.gesture_type == DOU_TAP) ? 1 : 0;
+	TPD_INFO("double_tap_pressed has been set to: %d\n", ts->double_tap_pressed);
+	sysfs_notify(&ts->client->dev.kobj, NULL, "double_tap_pressed");
+
 	if (ts->health_monitor_support) {
 		tp_healthinfo_report(&ts->monitor_data, HEALTH_GESTURE,
 				     &gesture_info_temp.gesture_type);
@@ -3088,6 +3092,7 @@ int register_common_touch_device(struct touchpanel_data *pdata)
 	/*step 22 : createproc proc files interface*/
 	init_touchpanel_proc(ts);
 	init_touch_misc_device(ts);
+	init_touchpanel_sysfs(ts);
 	if (ts->temperature_detect_support) {
 		ret = init_get_adc_channels(ts);
 		if (ret < 0)
