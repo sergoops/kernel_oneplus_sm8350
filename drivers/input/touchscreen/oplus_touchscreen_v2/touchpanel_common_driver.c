@@ -540,6 +540,10 @@ static void tp_gesture_handle(struct touchpanel_data *ts)
 	TPD_INFO("double_tap_pressed has been set to: %d\n", ts->double_tap_pressed);
 	sysfs_notify(&ts->client->dev.kobj, NULL, "double_tap_pressed");
 
+	ts->udfps_pressed = (gesture_info_temp.gesture_type == FINGER_PRINTDOWN) ? 1 : 0;
+	TPD_INFO("udfps_pressed has been set to: %d\n", ts->udfps_pressed);
+	sysfs_notify(&ts->client->dev.kobj, NULL, "udfps_pressed");
+
 	if (ts->health_monitor_support) {
 		tp_healthinfo_report(&ts->monitor_data, HEALTH_GESTURE,
 				     &gesture_info_temp.gesture_type);
