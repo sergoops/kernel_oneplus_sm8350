@@ -3242,12 +3242,25 @@ static inline ssize_t double_tap_pressed_get(struct device *device,
 }
 static DEVICE_ATTR(double_tap_pressed, S_IRUGO, double_tap_pressed_get, NULL);
 
+static inline ssize_t udfps_pressed_get(struct device *device,
+				struct device_attribute *attribute,
+				char *buffer)
+{
+	struct touchpanel_data *ts = dev_get_drvdata(device);
+	return scnprintf(buffer, PAGE_SIZE, "%i\n", ts->udfps_pressed);
+}
+static DEVICE_ATTR(udfps_pressed, S_IRUGO, udfps_pressed_get, NULL);
+
 void init_touchpanel_sysfs(struct touchpanel_data *ts)
 {
 	TPD_INFO("%s entry\n", __func__);
 
 	if (device_create_file(&ts->client->dev, &dev_attr_double_tap_pressed)) {
 		TPD_INFO("%s (double tap) driver_create_file failt\n", __func__);
+	}
+
+	if (device_create_file(&ts->client->dev, &dev_attr_udfps_pressed)) {
+		TPD_INFO("%s (udfps) driver_create_file failt\n", __func__);
 	}
 
 	TPD_INFO("sysfs files was registered\n");
