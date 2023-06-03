@@ -3046,6 +3046,7 @@ static int cgroup_update_dfl_csses(struct cgroup *cgrp)
 	struct cgroup *dsct;
 	struct ext_css_set *ext_src_set;
 	bool has_tasks;
+	struct ext_css_set *ext_src_set;
 	int ret;
 
 	lockdep_assert_held(&cgroup_mutex);
