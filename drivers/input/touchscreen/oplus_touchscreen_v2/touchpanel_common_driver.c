@@ -476,12 +476,6 @@ static void tp_gesture_handle(struct touchpanel_data *ts)
 #endif /* end of CONFIG_OPLUS_TP_APK*/
 
 	switch(gesture_info_temp.gesture_type) {
-		case DOU_TAP:
-			tp_memcpy(&ts->gesture, sizeof(ts->gesture), \
-			  &gesture_info_temp, sizeof(struct gesture_info), \
-			  sizeof(struct gesture_info));
-			gesture_code = KEY_WAKEUP;
-			break;
 		case FINGER_PRINTDOWN:
 			ts->fp_info.touch_state = 1;
 			ts->fp_info.x = gesture_info_temp.Point_start.x;
